@@ -12,7 +12,13 @@
         <p><strong>Batas Pengembalian:</strong> {{ $borrowing->due_date }}</p>
     </div>
 
-    <p>Mohon kembalikan buku tepat waktu untuk menghindari denda keterlambatan sebesar Rp 5.000 per hari.</p>
+    <p>
+        Mohon kembalikan buku tepat waktu untuk menghindari denda keterlambatan sebesar
+        Rp {{ number_format($borrowing->late_fee_per_day ?? 5000, 0, ',', '.') }} per hari
+        @if(($borrowing->grace_period_days ?? 0) > 0)
+            setelah masa toleransi {{ $borrowing->grace_period_days }} hari
+        @endif.
+    </p>
     
     <p>Terima kasih,<br>Perpus Naifa</p>
 </body>

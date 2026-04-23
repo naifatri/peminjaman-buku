@@ -12,7 +12,7 @@
 
 <div class="max-w-4xl">
     <div class="bg-white rounded-[2rem] shadow-sm border border-slate-100 p-8">
-        <form action="{{ route('admin.books.store') }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('admin.books.store') }}" method="POST" enctype="multipart/form-data" x-data="{ submitting: false }" @submit="submitting = true">
             @csrf
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6">
@@ -38,6 +38,14 @@
                         class="w-full rounded-2xl border-slate-200 focus:border-indigo-500 focus:ring focus:ring-indigo-500/10 transition-all duration-300 px-4 py-3 text-slate-600 placeholder:text-slate-300" 
                         placeholder="Nomor ISBN">
                     @error('isbn') <p class="mt-2 text-xs text-rose-500 font-medium ml-1">{{ $message }}</p> @enderror
+                </div>
+
+                <div>
+                    <label for="rack_location" class="block text-xs font-bold uppercase tracking-widest text-slate-400 mb-2 ml-1">Lokasi Rak</label>
+                    <input type="text" name="rack_location" id="rack_location" value="{{ old('rack_location') }}"
+                        class="w-full rounded-2xl border-slate-200 focus:border-indigo-500 focus:ring focus:ring-indigo-500/10 transition-all duration-300 px-4 py-3 text-slate-600 placeholder:text-slate-300"
+                        placeholder="Contoh: A1, B2, C-03">
+                    @error('rack_location') <p class="mt-2 text-xs text-rose-500 font-medium ml-1">{{ $message }}</p> @enderror
                 </div>
 
                 <div>
@@ -131,8 +139,9 @@
                 <a href="{{ route('admin.books.index') }}" class="px-8 py-3 bg-slate-100 hover:bg-slate-200 text-slate-600 rounded-2xl font-bold transition-all duration-300">
                     Batal
                 </a>
-                <button type="submit" class="px-8 py-3 bg-indigo-600 hover:bg-indigo-700 text-white rounded-2xl font-bold shadow-lg shadow-indigo-600/20 transition-all duration-300">
-                    Simpan Buku
+                <button type="submit" :disabled="submitting" :class="submitting ? 'opacity-70 cursor-wait' : ''" class="px-8 py-3 bg-indigo-600 hover:bg-indigo-700 text-white rounded-2xl font-bold shadow-lg shadow-indigo-600/20 transition-all duration-300">
+                    <span x-show="!submitting">Simpan Buku</span>
+                    <span x-show="submitting" x-cloak>Menyimpan...</span>
                 </button>
             </div>
         </form>

@@ -19,6 +19,7 @@ class UpdateUserRequest extends FormRequest
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', Rule::unique('users')->ignore($this->route('user'))],
             'password' => ['nullable', 'string', 'min:8', 'confirmed'],
             'role' => ['required', 'in:admin,peminjam'],
+            'account_status' => ['required', 'in:aktif,nonaktif'],
             'phone' => ['nullable', 'string', 'max:20'],
             'address' => ['nullable', 'string'],
         ];

@@ -22,8 +22,10 @@ class User extends Authenticatable
         'email',
         'password',
         'role',
+        'account_status',
         'phone',
         'address',
+        'last_login_at',
     ];
 
     /**
@@ -46,6 +48,7 @@ class User extends Authenticatable
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
+            'last_login_at' => 'datetime',
         ];
     }
 
@@ -64,6 +67,17 @@ class User extends Authenticatable
         return $this->hasMany(ActivityLog::class);
     }
 
+    public function bookFavorites()
+    {
+        return $this->hasMany(BookFavorite::class);
+    }
+
+    public function favoriteBooks()
+    {
+        return $this->belongsToMany(Book::class, 'book_favorites')
+            ->withTimestamps();
+    }
+
     public function isAdmin()
     {
         return $this->role === 'admin';
@@ -72,5 +86,10 @@ class User extends Authenticatable
     public function isPeminjam()
     {
         return $this->role === 'peminjam';
+    }
+
+    public function isActive()
+    {
+        return ($this->account_status ?? 'aktif') === 'aktif';
     }
 }

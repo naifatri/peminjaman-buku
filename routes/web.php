@@ -39,7 +39,12 @@ Route::middleware('auth')->group(function () {
     Route::middleware('role:admin')->prefix('admin')->name('admin.')->group(function () {
         Route::get('/dashboard', [AdminDashboard::class, 'index'])->name('dashboard');
         Route::resource('/categories', AdminCategory::class);
+        Route::patch('/books/{book}/stock', [AdminBook::class, 'updateStock'])->name('books.update-stock');
+        Route::post('/books/bulk-action', [AdminBook::class, 'bulkAction'])->name('books.bulk-action');
         Route::resource('/books', AdminBook::class);
+        Route::patch('/users/{user}/status', [AdminUser::class, 'toggleStatus'])->name('users.toggle-status');
+        Route::post('/users/{user}/reset-password', [AdminUser::class, 'resetPassword'])->name('users.reset-password');
+        Route::post('/users/bulk-action', [AdminUser::class, 'bulkAction'])->name('users.bulk-action');
         Route::resource('/users', AdminUser::class);
         
         // Fine Settings
@@ -51,10 +56,15 @@ Route::middleware('auth')->group(function () {
         Route::get('/borrowings/{borrowing}', [AdminBorrowing::class, 'show'])->name('borrowings.show');
         Route::post('/borrowings/{borrowing}/approve', [AdminBorrowing::class, 'approve'])->name('borrowings.approve');
         Route::post('/borrowings/{borrowing}/reject', [AdminBorrowing::class, 'reject'])->name('borrowings.reject');
+        Route::patch('/borrowings/{borrowing}/extend', [AdminBorrowing::class, 'extend'])->name('borrowings.extend');
+        Route::post('/borrowings/{borrowing}/mark-returned', [AdminBorrowing::class, 'markReturned'])->name('borrowings.mark-returned');
+        Route::post('/borrowings/{borrowing}/mark-fine-paid', [AdminBorrowing::class, 'markFinePaid'])->name('borrowings.mark-fine-paid');
         Route::post('/borrowings/{borrowing}/verify-return', [AdminBorrowing::class, 'verifyReturn'])->name('borrowings.verify-return');
         Route::post('/borrowings/{borrowing}/approve-payment', [AdminBorrowing::class, 'approvePayment'])->name('borrowings.approve-payment');
         
         Route::get('/fines', [AdminFine::class, 'index'])->name('fines.index');
+        Route::get('/fines/{fine}', [AdminFine::class, 'show'])->name('fines.show');
+        Route::post('/fines/{fine}/pay', [AdminFine::class, 'pay'])->name('fines.pay');
         Route::get('/reports', [AdminReport::class, 'index'])->name('reports.index');
         Route::get('/reports/export-pdf', [AdminReport::class, 'exportPdf'])->name('reports.export-pdf');
         Route::get('/reports/export-excel', [AdminReport::class, 'exportExcel'])->name('reports.export-excel');
@@ -63,6 +73,8 @@ Route::middleware('auth')->group(function () {
     // Peminjam Routes
     Route::middleware('role:peminjam')->prefix('peminjam')->name('peminjam.')->group(function () {
         Route::get('/books', [PeminjamBook::class, 'index'])->name('books.index');
+        Route::get('/books/favorites', [PeminjamBook::class, 'favorites'])->name('books.favorites');
+        Route::post('/books/{book}/favorite', [PeminjamBook::class, 'toggleFavorite'])->name('books.favorite');
         Route::get('/books/{book}', [PeminjamBook::class, 'show'])->name('books.show');
         
         // Complex Borrowing Flow (Peminjam)

@@ -18,6 +18,7 @@ class StoreUserRequest extends FormRequest
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:users,email'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
             'role' => ['required', 'in:admin,peminjam'],
+            'account_status' => ['required', 'in:aktif,nonaktif'],
             'phone' => ['nullable', 'string', 'max:20'],
             'address' => ['nullable', 'string'],
         ];

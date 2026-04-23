@@ -12,7 +12,7 @@
 
 <div class="max-w-4xl">
     <div class="bg-white rounded-[2rem] shadow-sm border border-slate-100 p-8">
-        <form action="{{ route('admin.users.update', $user) }}" method="POST">
+        <form action="{{ route('admin.users.update', $user) }}" method="POST" x-data="{ submitting: false }" @submit="submitting = true">
             @csrf
             @method('PUT')
 
@@ -58,6 +58,16 @@
                 </div>
 
                 <div>
+                    <label for="account_status" class="block text-xs font-bold uppercase tracking-widest text-slate-400 mb-2 ml-1">Status Akun</label>
+                    <select name="account_status" id="account_status"
+                        class="w-full rounded-2xl border-slate-200 focus:border-indigo-500 focus:ring focus:ring-indigo-500/10 transition-all duration-300 px-4 py-3 text-slate-600 appearance-none bg-[url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20fill%3D%22none%22%20viewBox%3D%220%200%2020%2020%22%3E%3Cpath%20stroke%3D%22%236b7280%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%20stroke-width%3D%221.5%22%20d%3D%22m6%208%204%204%204-4%22%2F%3E%3C%2Fsvg%3E')] bg-[length:1.25rem_1.25rem] bg-[right_1rem_center] bg-no-repeat" required>
+                        <option value="aktif" {{ old('account_status', $user->account_status ?? 'aktif') == 'aktif' ? 'selected' : '' }}>Aktif</option>
+                        <option value="nonaktif" {{ old('account_status', $user->account_status) == 'nonaktif' ? 'selected' : '' }}>Nonaktif</option>
+                    </select>
+                    @error('account_status') <p class="mt-2 text-xs text-rose-500 font-medium ml-1">{{ $message }}</p> @enderror
+                </div>
+
+                <div>
                     <label for="phone" class="block text-xs font-bold uppercase tracking-widest text-slate-400 mb-2 ml-1">Nomor Telepon</label>
                     <input type="text" name="phone" id="phone" value="{{ old('phone', $user->phone) }}" 
                         class="w-full rounded-2xl border-slate-200 focus:border-indigo-500 focus:ring focus:ring-indigo-500/10 transition-all duration-300 px-4 py-3 text-slate-600">
@@ -76,8 +86,9 @@
                 <a href="{{ route('admin.users.index') }}" class="px-8 py-3 bg-slate-100 hover:bg-slate-200 text-slate-600 rounded-2xl font-bold transition-all duration-300">
                     Batal
                 </a>
-                <button type="submit" class="px-8 py-3 bg-indigo-600 hover:bg-indigo-700 text-white rounded-2xl font-bold shadow-lg shadow-indigo-600/20 transition-all duration-300">
-                    Simpan Perubahan
+                <button type="submit" :disabled="submitting" :class="submitting ? 'opacity-70 cursor-wait' : ''" class="px-8 py-3 bg-indigo-600 hover:bg-indigo-700 text-white rounded-2xl font-bold shadow-lg shadow-indigo-600/20 transition-all duration-300">
+                    <span x-show="!submitting">Simpan Perubahan</span>
+                    <span x-show="submitting" x-cloak>Menyimpan...</span>
                 </button>
             </div>
         </form>

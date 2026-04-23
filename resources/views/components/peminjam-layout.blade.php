@@ -46,9 +46,14 @@
                     <span class="text-[11px] font-bold uppercase tracking-widest text-slate-500">Menu Utama</span>
                 </div>
 
-                <a href="{{ route('peminjam.books.index') }}" class="group flex items-center px-4 py-3 text-sm font-medium rounded-xl transition-all duration-200 {{ request()->routeIs('peminjam.books.*') ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-600/20' : 'hover:bg-slate-800 hover:text-white' }}">
-                    <i class="fas fa-book mr-4 text-lg {{ request()->routeIs('peminjam.books.*') ? 'text-white' : 'text-slate-500 group-hover:text-indigo-400' }}"></i>
-                    <span>Katalog Buku</span>
+                <a href="{{ route('peminjam.books.index') }}" class="group flex items-center px-4 py-3 text-sm font-medium rounded-xl transition-all duration-200 {{ request()->routeIs('peminjam.books.index', 'peminjam.books.show') ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-600/20' : 'hover:bg-slate-800 hover:text-white' }}">
+                    <i class="fas fa-book mr-4 text-lg {{ request()->routeIs('peminjam.books.index', 'peminjam.books.show') ? 'text-white' : 'text-slate-500 group-hover:text-indigo-400' }}"></i>
+                        <span>Katalog Buku</span>
+                </a>
+
+                <a href="{{ route('peminjam.books.favorites') }}" class="group flex items-center px-4 py-3 text-sm font-medium rounded-xl transition-all duration-200 {{ request()->routeIs('peminjam.books.favorites') ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-600/20' : 'hover:bg-slate-800 hover:text-white' }}">
+                    <i class="fas fa-heart mr-4 text-lg {{ request()->routeIs('peminjam.books.favorites') ? 'text-white' : 'text-slate-500 group-hover:text-indigo-400' }}"></i>
+                    <span>Buku Favorit</span>
                 </a>
 
                 <div class="px-4 mt-8 mb-2">
