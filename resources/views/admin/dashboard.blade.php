@@ -4,7 +4,7 @@
 
 @section('content')
 <div class="mb-8">
-    <h2 class="text-2xl font-bold text-slate-800 tracking-tight">Ringkasan Sistem</h2>
+    <h2 class="text-2xl font-bold text-slate-800 tracking-tight">Dashboard Admin</h2>
     <p class="text-slate-500 text-sm">Selamat datang kembali, berikut adalah statistik perpustakaan Anda hari ini.</p>
 </div>
 

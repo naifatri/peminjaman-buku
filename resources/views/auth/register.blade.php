@@ -21,6 +21,20 @@
             <x-input-error :messages="$errors->get('email')" class="mt-2 text-xs" />
         </div>
 
+        <div class="mt-5 grid gap-5 md:grid-cols-2">
+            <div class="space-y-1">
+                <x-input-label for="nisn" :value="__('NISN')" class="text-xs font-semibold uppercase tracking-wider text-gray-400 dark:text-gray-500" />
+                <x-text-input id="nisn" class="block w-full px-4 py-3 rounded-xl border-gray-200 focus:border-indigo-500 focus:ring-indigo-500 transition-all duration-200" type="text" name="nisn" :value="old('nisn')" required autocomplete="off" inputmode="numeric" maxlength="10" placeholder="10 digit NISN" />
+                <x-input-error :messages="$errors->get('nisn')" class="mt-2 text-xs" />
+            </div>
+
+            <div class="space-y-1">
+                <x-input-label for="phone" :value="__('Nomor Telepon')" class="text-xs font-semibold uppercase tracking-wider text-gray-400 dark:text-gray-500" />
+                <x-text-input id="phone" class="block w-full px-4 py-3 rounded-xl border-gray-200 focus:border-indigo-500 focus:ring-indigo-500 transition-all duration-200" type="text" name="phone" :value="old('phone')" required autocomplete="tel" inputmode="tel" placeholder="08xxxxxxxxxx" />
+                <x-input-error :messages="$errors->get('phone')" class="mt-2 text-xs" />
+            </div>
+        </div>
+
         <!-- Password -->
         <div class="mt-5 space-y-1">
             <x-input-label for="password" :value="__('Password')" class="text-xs font-semibold uppercase tracking-wider text-gray-400 dark:text-gray-500" />

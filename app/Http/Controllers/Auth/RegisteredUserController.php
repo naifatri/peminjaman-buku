@@ -9,6 +9,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Validation\Rules;
 use Illuminate\Validation\ValidationException;
 use Illuminate\View\View;
@@ -30,17 +31,33 @@ class RegisteredUserController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
-        $request->validate([
+        $hasNisnColumn = Schema::hasColumn('users', 'nisn');
+
+        $rules = [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
+            'phone' => ['required', 'string', 'min:10', 'max:20', 'regex:/^(\+62|62|0)[0-9]{9,18}$/'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
-        ]);
+        ];
 
-        $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
+        if ($hasNisnColumn) {
+            $rules['nisn'] = ['required', 'digits:10', 'unique:'.User::class.',nisn'];
+        }
+
+        $validated = $request->validate($rules);
+
+        $payload = [
+            'name' => $validated['name'],
+            'email' => $validated['email'],
+            'phone' => $validated['phone'],
             'password' => Hash::make($request->password),
-        ]);
+        ];
+
+        if ($hasNisnColumn && isset($validated['nisn'])) {
+            $payload['nisn'] = $validated['nisn'];
+        }
+
+        $user = User::create($payload);
 
         event(new Registered($user));
 

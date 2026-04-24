@@ -282,7 +282,7 @@
                     <p class="mt-5 text-[2.35rem] font-black leading-none text-rose-500" x-text="'Rp ' + activeFineAmount"></p>
                 </div>
 
-                <form :action="'/peminjam/borrowings/' + activeBorrowing + '/pay-fine'" method="POST" class="flex-1 overflow-y-auto pr-1">
+                <form :action="'/peminjam/borrowings/' + activeBorrowing + '/pay-fine'" method="POST" enctype="multipart/form-data" class="flex-1 overflow-y-auto pr-1">
                     @csrf
                     <input type="hidden" name="payment_method" :value="selectedPayment">
 
@@ -344,6 +344,15 @@
                                 <rect x="85" y="40" width="5" height="20" fill="currentColor"/>
                                 <rect x="40" y="85" width="20" height="5" fill="currentColor"/>
                             </svg>
+                        </div>
+
+                        <div class="mt-6 w-full">
+                            <label for="payment_proof_fines" class="ml-1 text-[11px] font-bold uppercase tracking-[0.24em] text-slate-400">Upload Bukti Pembayaran</label>
+                            <input id="payment_proof_fines" type="file" name="payment_proof" accept="image/*" class="mt-2 block w-full rounded-2xl border-slate-200 bg-white px-4 py-3 text-sm text-slate-600 transition-all focus:border-indigo-500 focus:ring-indigo-500/10" :required="selectedPayment === 'qris'">
+                            <p class="mt-2 text-xs text-slate-400">Format gambar JPG, JPEG, PNG, atau WEBP. Maksimal 2 MB.</p>
+                            @error('payment_proof')
+                                <p class="mt-2 text-xs font-medium text-rose-500">{{ $message }}</p>
+                            @enderror
                         </div>
                     </div>
 

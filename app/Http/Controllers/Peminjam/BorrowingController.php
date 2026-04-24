@@ -11,6 +11,7 @@ use App\Services\FinePolicyService;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\ValidationException;
 
 class BorrowingController extends Controller
@@ -205,11 +206,28 @@ class BorrowingController extends Controller
 
         $request->validate([
             'payment_method' => 'required|in:tunai,ganti_buku,qris',
+            'payment_proof' => ['nullable', 'image', 'max:2048', 'required_if:payment_method,qris'],
         ]);
 
         $fine = $borrowing->fine;
+        $paymentProofPath = $fine->payment_proof;
+
+        if ($request->payment_method === 'qris' && $request->hasFile('payment_proof')) {
+            if ($paymentProofPath) {
+                Storage::disk('public')->delete($paymentProofPath);
+            }
+
+            $paymentProofPath = $request->file('payment_proof')->store('payment-proofs', 'public');
+        }
+
+        if ($request->payment_method !== 'qris' && $paymentProofPath) {
+            Storage::disk('public')->delete($paymentProofPath);
+            $paymentProofPath = null;
+        }
+
         $fine->update([
             'payment_method' => $request->payment_method,
+            'payment_proof' => $paymentProofPath,
         ]);
 
         $borrowing->update([
@@ -219,7 +237,7 @@ class BorrowingController extends Controller
         ActivityLog::create([
             'user_id' => auth()->id(),
             'action' => 'Konfirmasi Denda',
-            'description' => "Pengguna memilih metode pembayaran {$request->payment_method} untuk denda buku '{$borrowing->book->title}'",
+            'description' => "Pengguna memilih metode pembayaran {$request->payment_method} untuk denda buku '{$borrowing->book->title}'" . ($request->payment_method === 'qris' ? ' dan mengunggah bukti pembayaran.' : '.'),
         ]);
 
         return back()->with('success', 'Metode pembayaran dikonfirmasi. Menunggu verifikasi admin.');

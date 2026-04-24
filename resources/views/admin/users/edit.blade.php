@@ -32,6 +32,14 @@
                 </div>
 
                 <div>
+                    <label for="nisn" class="block text-xs font-bold uppercase tracking-widest text-slate-400 mb-2 ml-1">NISN</label>
+                    <input type="text" name="nisn" id="nisn" value="{{ old('nisn', $user->nisn) }}"
+                        class="w-full rounded-2xl border-slate-200 focus:border-indigo-500 focus:ring focus:ring-indigo-500/10 transition-all duration-300 px-4 py-3 text-slate-600 placeholder:text-slate-300"
+                        placeholder="Masukkan 10 digit NISN" maxlength="10" inputmode="numeric" required>
+                    @error('nisn') <p class="mt-2 text-xs text-rose-500 font-medium ml-1">{{ $message }}</p> @enderror
+                </div>
+
+                <div>
                     <label for="password" class="block text-xs font-bold uppercase tracking-widest text-slate-400 mb-2 ml-1">Password Baru (Opsional)</label>
                     <input type="password" name="password" id="password" 
                         class="w-full rounded-2xl border-slate-200 focus:border-indigo-500 focus:ring focus:ring-indigo-500/10 transition-all duration-300 px-4 py-3 text-slate-600 placeholder:text-slate-300" 
@@ -70,7 +78,7 @@
                 <div>
                     <label for="phone" class="block text-xs font-bold uppercase tracking-widest text-slate-400 mb-2 ml-1">Nomor Telepon</label>
                     <input type="text" name="phone" id="phone" value="{{ old('phone', $user->phone) }}" 
-                        class="w-full rounded-2xl border-slate-200 focus:border-indigo-500 focus:ring focus:ring-indigo-500/10 transition-all duration-300 px-4 py-3 text-slate-600">
+                        class="w-full rounded-2xl border-slate-200 focus:border-indigo-500 focus:ring focus:ring-indigo-500/10 transition-all duration-300 px-4 py-3 text-slate-600" required>
                     @error('phone') <p class="mt-2 text-xs text-rose-500 font-medium ml-1">{{ $message }}</p> @enderror
                 </div>
 

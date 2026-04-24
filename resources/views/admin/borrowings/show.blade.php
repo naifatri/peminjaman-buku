@@ -164,10 +164,41 @@
                 <div class="mt-6 rounded-[1.5rem] border px-4 py-4 {{ $borrowing->fine && $borrowing->fine->status === 'lunas' ? 'border-emerald-200 bg-emerald-50 text-emerald-700' : 'border-slate-200 bg-slate-50 text-slate-700' }}">
                     <p class="text-[11px] font-bold uppercase tracking-[0.2em]">Status pembayaran</p>
                     <p class="mt-2 text-sm font-semibold">{{ $summary['payment_status'] }}</p>
+                    @if($borrowing->fine?->payment_method)
+                        <p class="mt-2 text-xs">Metode: {{ strtoupper(str_replace('_', ' ', $borrowing->fine->payment_method)) }}</p>
+                    @endif
                     @if($borrowing->fine?->paid_at)
                         <p class="mt-2 text-xs">Dibayar pada {{ $borrowing->fine->paid_at->translatedFormat('d M Y H:i') }}</p>
                     @endif
                 </div>
+
+                @if($borrowing->fine?->payment_method === 'qris')
+                    <div class="mt-6 rounded-[1.75rem] border border-indigo-100 bg-indigo-50/70 p-5">
+                        <div class="flex items-center justify-between gap-4">
+                            <div>
+                                <p class="text-[11px] font-bold uppercase tracking-[0.2em] text-indigo-500">Bukti Pembayaran QRIS</p>
+                                <p class="mt-2 text-sm text-indigo-700">
+                                    @if($borrowing->fine->payment_proof)
+                                        Bukti pembayaran diunggah oleh peminjam dan bisa diperiksa di bawah ini.
+                                    @else
+                                        Peminjam memilih QRIS, tetapi bukti pembayaran belum diunggah.
+                                    @endif
+                                </p>
+                            </div>
+                            @if($borrowing->fine->payment_proof)
+                                <a href="{{ asset('storage/' . $borrowing->fine->payment_proof) }}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center rounded-xl bg-white px-4 py-2 text-xs font-bold text-indigo-700 shadow-sm transition-all hover:bg-indigo-100">
+                                    Lihat penuh
+                                </a>
+                            @endif
+                        </div>
+
+                        @if($borrowing->fine->payment_proof)
+                            <div class="mt-5 overflow-hidden rounded-[1.5rem] border border-indigo-100 bg-white">
+                                <img src="{{ asset('storage/' . $borrowing->fine->payment_proof) }}" alt="Bukti pembayaran QRIS untuk transaksi {{ $borrowing->id }}" class="h-auto max-h-[28rem] w-full object-contain bg-slate-50">
+                            </div>
+                        @endif
+                    </div>
+                @endif
             </div>
 
             <div class="rounded-[2rem] border border-slate-100 bg-white p-8 shadow-sm">

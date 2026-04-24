@@ -45,7 +45,7 @@
         <form action="{{ route('admin.users.index') }}" method="GET" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-[1.8fr_1fr_1fr_1fr_auto] gap-4" x-data="{ loading: false }" @submit="loading = true">
             <div class="relative">
                 <i class="fas fa-search absolute left-4 top-1/2 -translate-y-1/2 text-slate-400"></i>
-                <input type="text" name="search" value="{{ request('search') }}" placeholder="Cari nama atau email..."
+                <input type="text" name="search" value="{{ request('search') }}" placeholder="Cari nama, email, NISN, atau telepon..."
                     class="w-full pl-12 pr-4 py-3 rounded-2xl border-slate-200 focus:border-indigo-500 focus:ring focus:ring-indigo-500/10 transition-all duration-300 text-slate-600 placeholder:text-slate-300">
             </div>
 
@@ -112,13 +112,14 @@
         </div>
 
         <div class="overflow-x-auto">
-            <table class="w-full text-left border-collapse min-w-[1180px]">
+            <table class="w-full text-left border-collapse min-w-[1280px]">
                 <thead>
                     <tr class="bg-slate-50/50">
                         <th class="px-6 py-4 border-b border-slate-100">
                             <input type="checkbox" @change="toggleAll($event)" class="w-4 h-4 rounded border-slate-300 text-indigo-600 focus:ring-indigo-500">
                         </th>
                         <th class="px-4 py-4 text-[11px] font-bold uppercase tracking-widest text-slate-400 border-b border-slate-100">Pengguna</th>
+                        <th class="px-4 py-4 text-[11px] font-bold uppercase tracking-widest text-slate-400 border-b border-slate-100">NISN</th>
                         <th class="px-4 py-4 text-[11px] font-bold uppercase tracking-widest text-slate-400 border-b border-slate-100">Kontak</th>
                         <th class="px-4 py-4 text-[11px] font-bold uppercase tracking-widest text-slate-400 border-b border-slate-100">Role</th>
                         <th class="px-4 py-4 text-[11px] font-bold uppercase tracking-widest text-slate-400 border-b border-slate-100">Status</th>
@@ -152,6 +153,15 @@
                                         <p class="text-xs text-slate-400">{{ $user->email }}</p>
                                     </div>
                                 </div>
+                            </td>
+                            <td class="px-4 py-5 text-sm font-semibold text-slate-600">
+                                @if ($user->nisn)
+                                    <span>{{ $user->nisn }}</span>
+                                @else
+                                    <span class="inline-flex items-center rounded-full bg-amber-50 px-3 py-1 text-[11px] font-bold text-amber-600">
+                                        Belum sinkron
+                                    </span>
+                                @endif
                             </td>
                             <td class="px-4 py-5 text-sm text-slate-500">
                                 {{ $user->phone ?: '-' }}
@@ -213,7 +223,7 @@
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="9" class="px-8 py-16 text-center">
+                            <td colspan="10" class="px-8 py-16 text-center">
                                 <div class="flex flex-col items-center">
                                     <div class="w-16 h-16 bg-slate-50 rounded-2xl flex items-center justify-center mb-4">
                                         <i class="fas fa-users text-2xl text-slate-200"></i>

@@ -24,7 +24,9 @@ class UserController extends Controller
 
             $query->where(function ($userQuery) use ($search) {
                 $userQuery->where('name', 'like', "%{$search}%")
-                    ->orWhere('email', 'like', "%{$search}%");
+                    ->orWhere('email', 'like', "%{$search}%")
+                    ->orWhere('nisn', 'like', "%{$search}%")
+                    ->orWhere('phone', 'like', "%{$search}%");
             });
         }
 
@@ -82,7 +84,9 @@ class UserController extends Controller
             'active_borrowings' => $user->borrowings()
                 ->whereIn('status', ['diajukan', 'dipinjam', 'terlambat', 'dikembalikan', 'verifikasi_denda', 'proses_bayar'])
                 ->count(),
-            'unpaid_fines' => $user->fines()->where('status', 'belum_lunas')->sum('amount'),
+            'unpaid_fines' => $user->fines()
+                ->where('fines.status', 'belum_lunas')
+                ->sum('fines.amount'),
         ];
 
         return view('admin.users.show', compact('user', 'userStats'));

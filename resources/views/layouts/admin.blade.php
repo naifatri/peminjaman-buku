@@ -78,9 +78,9 @@
                     <span>Denda</span>
                 </a>
 
-                <a href="{{ route('admin.settings.fine.index') }}" class="group flex items-center px-4 py-3 text-sm font-medium rounded-xl transition-all duration-200 {{ request()->routeIs('admin.settings.fine.*') ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-600/20' : 'hover:bg-slate-800 hover:text-white' }}">
-                    <i class="fas fa-cog mr-4 text-lg {{ request()->routeIs('admin.settings.fine.*') ? 'text-white' : 'text-slate-500 group-hover:text-indigo-400' }}"></i>
-                    <span>Pengaturan Denda</span>
+                <a href="{{ route('admin.settings.fine.index') }}" class="group flex items-center px-4 py-3 text-sm font-medium rounded-xl transition-all duration-200 {{ request()->routeIs('admin.settings.fine.*') || (request()->routeIs('profile.*') && auth()->user()?->isAdmin()) ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-600/20' : 'hover:bg-slate-800 hover:text-white' }}">
+                    <i class="fas fa-cog mr-4 text-lg {{ request()->routeIs('admin.settings.fine.*') || (request()->routeIs('profile.*') && auth()->user()?->isAdmin()) ? 'text-white' : 'text-slate-500 group-hover:text-indigo-400' }}"></i>
+                    <span>Pengaturan</span>
                 </a>
 
                 <div class="px-4 mt-8 mb-2">
@@ -115,7 +115,7 @@
                     </button>
                     <div class="hidden lg:block">
                         <h2 class="text-sm font-semibold text-slate-400 uppercase tracking-widest">Workspace</h2>
-                        <p class="text-lg font-bold text-slate-800">Admin Dashboard</p>
+                        <p class="text-lg font-bold text-slate-800">@yield('header', 'Admin Dashboard')</p>
                     </div>
                 </div>
 
@@ -182,8 +182,12 @@
                     <!-- Dropdown Profile -->
                     <div x-data="{ dropdownOpen: false }" class="relative">
                         <button @click="dropdownOpen = !dropdownOpen" class="flex items-center space-x-3 p-1.5 hover:bg-slate-50 rounded-xl transition-all duration-200 focus:outline-none group">
-                            <div class="w-10 h-10 rounded-xl bg-indigo-100 flex items-center justify-center border border-indigo-200">
-                                <span class="text-indigo-700 font-bold">{{ substr(Auth::user()->name, 0, 1) }}</span>
+                            <div class="w-10 h-10 overflow-hidden rounded-xl bg-indigo-100 flex items-center justify-center border border-indigo-200">
+                                @if (Auth::user()->avatar_url)
+                                    <img src="{{ Auth::user()->avatar_url }}" alt="{{ Auth::user()->name }}" class="h-full w-full object-cover">
+                                @else
+                                    <span class="text-indigo-700 font-bold">{{ substr(Auth::user()->name, 0, 1) }}</span>
+                                @endif
                             </div>
                             <div class="hidden md:flex flex-col items-start leading-tight">
                                 <span class="text-sm font-bold text-slate-800 group-hover:text-indigo-600 transition-colors">{{ Auth::user()->name }}</span>
@@ -266,7 +270,5 @@
             background: #94a3b8;
         }
     </style>
-</body>
-</html>
 </body>
 </html>
