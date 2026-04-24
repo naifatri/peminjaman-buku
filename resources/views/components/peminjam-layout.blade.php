@@ -16,7 +16,7 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body class="font-sans antialiased bg-slate-50" x-data="{ sidebarOpen: false }">
-    <div class="flex h-screen overflow-hidden">
+    <div class="app-shell flex min-h-dvh overflow-hidden lg:h-screen">
         <div
             x-show="sidebarOpen"
             x-transition.opacity
@@ -27,9 +27,9 @@
 
         <aside
             :class="sidebarOpen ? 'translate-x-0' : '-translate-x-full'"
-            class="fixed inset-y-0 left-0 z-50 w-72 bg-[#0f172a] text-slate-300 transition-transform duration-300 ease-in-out lg:static lg:translate-x-0 flex flex-col shadow-2xl"
+            class="app-sidebar fixed inset-y-0 left-0 z-50 w-72 max-w-[86vw] bg-[#0f172a] text-slate-300 transition-transform duration-300 ease-in-out lg:static lg:max-w-none lg:translate-x-0 flex flex-col shadow-2xl"
         >
-            <div class="flex items-center px-8 h-20 bg-[#1e293b]/50 border-b border-slate-700/50">
+            <div class="flex items-center px-5 sm:px-6 lg:px-8 h-20 bg-[#1e293b]/50 border-b border-slate-700/50">
                 <a href="{{ route('peminjam.books.index') }}" class="flex items-center space-x-3 group">
                     <div class="p-2 bg-indigo-500 rounded-lg group-hover:rotate-12 transition-transform duration-300 shadow-lg shadow-indigo-500/30">
                         <i class="fas fa-book-open text-white text-xl"></i>
@@ -82,19 +82,23 @@
             </div>
         </aside>
 
-        <div class="flex flex-col flex-1 w-full bg-slate-50">
-            <header class="flex items-center justify-between h-20 px-8 bg-white border-b border-slate-200 sticky top-0 z-10 shadow-sm">
-                <div class="flex items-center">
-                    <button @click="sidebarOpen = true" class="p-2 -ml-2 text-slate-500 hover:text-indigo-600 hover:bg-slate-100 rounded-lg transition-colors lg:hidden focus:outline-none">
+        <div class="app-main flex min-w-0 flex-col flex-1 w-full bg-slate-50">
+            <header class="app-header sticky top-0 z-10 flex flex-wrap items-center justify-between gap-3 border-b border-slate-200 bg-white px-4 py-4 shadow-sm sm:px-6 lg:h-20 lg:flex-nowrap lg:px-8 lg:py-0">
+                <div class="flex min-w-0 items-center gap-3">
+                    <button @click="sidebarOpen = true" class="shrink-0 p-2 -ml-2 text-slate-500 hover:text-indigo-600 hover:bg-slate-100 rounded-lg transition-colors lg:hidden focus:outline-none">
                         <i class="fas fa-bars text-xl"></i>
                     </button>
+                    <div class="min-w-0 lg:hidden">
+                        <h2 class="text-[11px] font-semibold text-slate-400 uppercase tracking-widest">Workspace</h2>
+                        <p class="truncate text-base font-bold text-slate-800">{{ $pageTitle }}</p>
+                    </div>
                     <div class="hidden lg:block">
                         <h2 class="text-sm font-semibold text-slate-400 uppercase tracking-widest">Workspace</h2>
                         <p class="text-lg font-bold text-slate-800">{{ $pageTitle }}</p>
                     </div>
                 </div>
 
-                <div class="flex items-center space-x-4">
+                <div class="app-header-actions flex items-center gap-2 sm:gap-4">
                     <div x-data="{ notificationOpen: false }" class="relative">
                         <button @click="notificationOpen = !notificationOpen" class="relative p-2 text-slate-400 hover:text-indigo-600 hover:bg-slate-100 rounded-xl transition-all duration-200">
                             <i class="far fa-bell text-xl"></i>
@@ -152,7 +156,7 @@
                         </div>
                     </div>
 
-                    <div class="h-8 w-[1px] bg-slate-200 mx-2"></div>
+                    <div class="hidden sm:block h-8 w-[1px] bg-slate-200 mx-1"></div>
 
                     <div x-data="{ dropdownOpen: false }" class="relative">
                         <button @click="dropdownOpen = !dropdownOpen" class="flex items-center space-x-3 p-1.5 hover:bg-slate-50 rounded-xl transition-all duration-200 focus:outline-none group">
@@ -205,7 +209,7 @@
             </header>
 
             <main class="flex-1 overflow-x-hidden overflow-y-auto custom-scrollbar bg-slate-50">
-                <div class="container mx-auto px-8 py-10">
+                <div class="app-page mx-auto w-full max-w-[1600px] px-4 py-6 sm:px-6 lg:px-8 lg:py-10">
                     @if (session('success'))
                         <div class="mb-6 flex items-center p-4 bg-emerald-50 border-l-4 border-emerald-500 text-emerald-800 rounded-r-2xl shadow-sm" x-data="{ show: true }" x-show="show" x-transition>
                             <i class="fas fa-check-circle mr-3 text-xl text-emerald-500"></i>
@@ -231,25 +235,5 @@
             </main>
         </div>
     </div>
-
-    <style>
-        [x-cloak] {
-            display: none !important;
-        }
-        .custom-scrollbar::-webkit-scrollbar {
-            width: 4px;
-            height: 4px;
-        }
-        .custom-scrollbar::-webkit-scrollbar-track {
-            background: transparent;
-        }
-        .custom-scrollbar::-webkit-scrollbar-thumb {
-            background: #cbd5e1;
-            border-radius: 10px;
-        }
-        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-            background: #94a3b8;
-        }
-    </style>
 </body>
 </html>

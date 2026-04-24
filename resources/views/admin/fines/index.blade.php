@@ -13,7 +13,7 @@
         </div>
     </div>
 
-    <div class="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3">
+    <div class="metric-grid grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3">
         <div class="rounded-[2rem] border border-rose-100 bg-rose-50/80 p-6 shadow-sm">
             <p class="text-[11px] font-bold uppercase tracking-[0.28em] text-rose-500">Total Belum Dibayar</p>
             <p class="mt-4 text-3xl font-black text-rose-700">Rp {{ number_format($stats['unpaid_total'], 0, ',', '.') }}</p>
@@ -90,7 +90,7 @@
             maksimal <span class="font-black">{{ $activePolicy['max_fine_amount'] ? 'Rp ' . number_format($activePolicy['max_fine_amount'], 0, ',', '.') : 'tanpa batas' }}</span>.
         </div>
 
-        <form action="{{ route('admin.fines.index') }}" method="GET" class="grid grid-cols-1 gap-4 lg:grid-cols-6" @submit="loading = true">
+        <form action="{{ route('admin.fines.index') }}" method="GET" class="responsive-filter-form grid grid-cols-1 gap-4 lg:grid-cols-6" @submit="loading = true">
             <div class="relative lg:col-span-2">
                 <i class="fas fa-search absolute left-4 top-1/2 -translate-y-1/2 text-slate-400"></i>
                 <input type="text" name="search" value="{{ request('search') }}" placeholder="Cari nama peminjam atau judul buku..." class="w-full rounded-2xl border-slate-200 py-3 pl-12 pr-4 text-slate-600 placeholder:text-slate-300 transition-all duration-300 focus:border-indigo-500 focus:ring focus:ring-indigo-500/10">
@@ -121,7 +121,7 @@
                 <option value="highest" @selected(request('sort') === 'highest')>Denda Terbesar</option>
             </select>
 
-            <div class="flex gap-2 lg:col-span-6 lg:justify-end">
+            <div class="responsive-filter-actions flex gap-2 lg:col-span-6 lg:justify-end">
                 <button type="submit" class="rounded-2xl bg-slate-900 px-5 py-3 text-sm font-bold text-white transition-all duration-300 hover:bg-slate-950" :disabled="loading">
                     <span x-show="!loading">Terapkan</span>
                     <span x-show="loading" x-cloak>Memuat...</span>
@@ -133,7 +133,7 @@
         </form>
     </div>
 
-    <div class="overflow-hidden rounded-[2rem] border border-slate-100 bg-white shadow-sm">
+    <div class="responsive-table-card overflow-hidden rounded-[2rem] border border-slate-100 bg-white shadow-sm">
         <div class="overflow-x-auto">
             <table class="w-full min-w-[1200px] border-collapse text-left">
                 <thead>

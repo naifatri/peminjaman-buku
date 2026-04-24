@@ -1,3 +1,114 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+    html {
+        scroll-behavior: smooth;
+    }
+
+    body {
+        overflow-x: hidden;
+    }
+}
+
+[x-cloak] {
+    display: none !important;
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 999px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: #94a3b8;
+}
+
+@media (max-width: 1023.98px) {
+    .app-shell {
+        min-height: 100dvh;
+        height: auto;
+    }
+
+    .app-sidebar {
+        width: min(20rem, 86vw);
+        max-width: 86vw;
+    }
+
+    .app-main {
+        min-width: 0;
+    }
+}
+
+@media (max-width: 767.98px) {
+    .metric-grid {
+        grid-template-columns: 1fr !important;
+    }
+
+    .responsive-filter-form,
+    .responsive-bulk-form {
+        grid-template-columns: 1fr !important;
+    }
+
+    .responsive-filter-actions,
+    .responsive-stack-actions {
+        flex-direction: column;
+    }
+
+    .responsive-filter-actions > *,
+    .responsive-stack-actions > * {
+        width: 100%;
+    }
+
+    .responsive-filter-actions > a,
+    .responsive-filter-actions > button,
+    .responsive-stack-actions > a,
+    .responsive-stack-actions > button {
+        justify-content: center;
+    }
+
+    .responsive-table-card {
+        border-radius: 1.5rem;
+    }
+
+    .responsive-table-card .overflow-x-auto {
+        position: relative;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .responsive-table-card .overflow-x-auto::after {
+        content: "Geser tabel ke samping";
+        display: block;
+        padding: 0.75rem 1rem 0;
+        font-size: 0.7rem;
+        font-weight: 700;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: #94a3b8;
+        white-space: nowrap;
+    }
+
+    .responsive-table-card table {
+        min-width: max(100%, 720px);
+    }
+
+    .responsive-table-card table[class*="min-w-["] {
+        min-width: max(100%, 720px) !important;
+    }
+
+    .responsive-modal {
+        max-height: calc(100dvh - 2rem);
+        overflow-y: auto;
+    }
+}

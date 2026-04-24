@@ -8,12 +8,12 @@
     <p class="text-slate-500 text-sm">Selamat datang kembali, berikut adalah statistik perpustakaan Anda hari ini.</p>
 </div>
 
-<div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-10">
+<div class="metric-grid grid grid-cols-1 md:grid-cols-3 gap-5 lg:gap-8 mb-10">
     <!-- Total Buku Card -->
-    <div class="relative overflow-hidden bg-white p-8 rounded-3xl shadow-sm border border-slate-100 group hover:shadow-xl hover:shadow-indigo-500/5 transition-all duration-300">
+    <div class="relative overflow-hidden bg-white p-6 sm:p-8 rounded-3xl shadow-sm border border-slate-100 group hover:shadow-xl hover:shadow-indigo-500/5 transition-all duration-300">
         <div class="absolute -right-6 -top-6 w-32 h-32 bg-indigo-50 rounded-full group-hover:scale-110 transition-transform duration-500 opacity-50"></div>
-        <div class="relative flex items-center">
-            <div class="p-4 rounded-2xl bg-indigo-500 text-white shadow-lg shadow-indigo-200 mr-6 group-hover:rotate-6 transition-transform">
+        <div class="relative flex items-center gap-4">
+            <div class="p-4 rounded-2xl bg-indigo-500 text-white shadow-lg shadow-indigo-200 group-hover:rotate-6 transition-transform">
                 <i class="fas fa-book text-2xl"></i>
             </div>
             <div>
@@ -28,10 +28,10 @@
     </div>
     
     <!-- Peminjaman Aktif Card -->
-    <div class="relative overflow-hidden bg-white p-8 rounded-3xl shadow-sm border border-slate-100 group hover:shadow-xl hover:shadow-amber-500/5 transition-all duration-300">
+    <div class="relative overflow-hidden bg-white p-6 sm:p-8 rounded-3xl shadow-sm border border-slate-100 group hover:shadow-xl hover:shadow-amber-500/5 transition-all duration-300">
         <div class="absolute -right-6 -top-6 w-32 h-32 bg-amber-50 rounded-full group-hover:scale-110 transition-transform duration-500 opacity-50"></div>
-        <div class="relative flex items-center">
-            <div class="p-4 rounded-2xl bg-amber-500 text-white shadow-lg shadow-amber-200 mr-6 group-hover:rotate-6 transition-transform">
+        <div class="relative flex items-center gap-4">
+            <div class="p-4 rounded-2xl bg-amber-500 text-white shadow-lg shadow-amber-200 group-hover:rotate-6 transition-transform">
                 <i class="fas fa-exchange-alt text-2xl"></i>
             </div>
             <div>
@@ -46,10 +46,10 @@
     </div>
 
     <!-- Denda Card -->
-    <div class="relative overflow-hidden bg-white p-8 rounded-3xl shadow-sm border border-slate-100 group hover:shadow-xl hover:shadow-rose-500/5 transition-all duration-300">
+    <div class="relative overflow-hidden bg-white p-6 sm:p-8 rounded-3xl shadow-sm border border-slate-100 group hover:shadow-xl hover:shadow-rose-500/5 transition-all duration-300">
         <div class="absolute -right-6 -top-6 w-32 h-32 bg-rose-50 rounded-full group-hover:scale-110 transition-transform duration-500 opacity-50"></div>
-        <div class="relative flex items-center">
-            <div class="p-4 rounded-2xl bg-rose-500 text-white shadow-lg shadow-rose-200 mr-6 group-hover:rotate-6 transition-transform">
+        <div class="relative flex items-center gap-4">
+            <div class="p-4 rounded-2xl bg-rose-500 text-white shadow-lg shadow-rose-200 group-hover:rotate-6 transition-transform">
                 <i class="fas fa-wallet text-2xl"></i>
             </div>
             <div>
@@ -64,10 +64,10 @@
     </div>
 </div>
 
-<div class="grid grid-cols-1 lg:grid-cols-5 gap-8 mb-8">
+<div class="grid grid-cols-1 lg:grid-cols-5 gap-5 lg:gap-8 mb-8">
     <!-- Chart Section -->
-    <div class="lg:col-span-3 bg-white rounded-[2rem] shadow-sm border border-slate-100 p-8">
-        <div class="flex items-center justify-between mb-8">
+    <div class="lg:col-span-3 bg-white rounded-[2rem] shadow-sm border border-slate-100 p-5 sm:p-8">
+        <div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between mb-8">
             <div>
                 <h3 class="text-xl font-bold text-slate-800">Statistik Peminjaman</h3>
                 <p class="text-sm text-slate-400">Data peminjaman per bulan di tahun {{ $currentYear }}</p>
@@ -82,8 +82,8 @@
     </div>
 
     <!-- Recent Activity Table Section -->
-    <div class="lg:col-span-2 bg-white rounded-[2rem] shadow-sm border border-slate-100 flex flex-col overflow-hidden">
-        <div class="p-8 border-b border-slate-50 flex justify-between items-center">
+    <div class="responsive-table-card lg:col-span-2 bg-white rounded-[2rem] shadow-sm border border-slate-100 flex flex-col overflow-hidden">
+        <div class="p-5 sm:p-8 border-b border-slate-50 flex flex-col gap-4 sm:flex-row sm:justify-between sm:items-center">
             <div>
                 <h3 class="text-xl font-bold text-slate-800">Peminjaman Terbaru</h3>
                 <p class="text-sm text-slate-400">Aktivitas terakhir di perpustakaan</p>

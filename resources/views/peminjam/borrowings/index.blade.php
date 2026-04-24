@@ -42,7 +42,7 @@
             </div>
         </div>
 
-        <div class="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-4">
+        <div class="metric-grid grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-4">
             <div class="rounded-[2rem] border border-amber-100 bg-amber-50/80 p-6 shadow-sm">
                 <p class="text-[11px] font-bold uppercase tracking-[0.24em] text-amber-500">Sedang Dipinjam</p>
                 <p class="mt-4 text-3xl font-black text-amber-700">{{ number_format($activeCount) }}</p>
@@ -119,7 +119,7 @@
         @endif
 
         <div class="rounded-[2rem] border border-slate-100 bg-white p-6 shadow-sm">
-            <form action="{{ route('peminjam.borrowings.index') }}" method="GET" class="grid grid-cols-1 gap-4 lg:grid-cols-[minmax(0,1.6fr)_220px_220px_auto]" @submit="loading = true">
+            <form action="{{ route('peminjam.borrowings.index') }}" method="GET" class="responsive-filter-form grid grid-cols-1 gap-4 lg:grid-cols-[minmax(0,1.6fr)_220px_220px_auto]" @submit="loading = true">
                 <div class="relative">
                     <i class="fas fa-search absolute left-4 top-1/2 -translate-y-1/2 text-slate-400"></i>
                     <input type="text" name="search" value="{{ $search }}" placeholder="Cari berdasarkan judul buku..." class="w-full rounded-2xl border-slate-200 py-3 pl-12 pr-4 text-slate-600 placeholder:text-slate-300 transition-all duration-300 focus:border-indigo-500 focus:ring focus:ring-indigo-500/10">
@@ -135,7 +135,7 @@
                 <div class="rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-500">
                     Menampilkan <span class="font-bold text-slate-700">{{ $borrowings->total() }}</span> transaksi
                 </div>
-                <div class="flex gap-2">
+                <div class="responsive-filter-actions flex gap-2">
                     <button type="submit" class="flex-1 rounded-2xl bg-slate-900 px-4 py-3 text-sm font-bold text-white transition-all duration-300 hover:bg-slate-950" :disabled="loading">
                         <span x-show="!loading">Terapkan</span>
                         <span x-show="loading" x-cloak>Memuat...</span>
@@ -147,7 +147,7 @@
             </form>
         </div>
 
-        <div class="overflow-hidden rounded-[2rem] border border-slate-100 bg-white shadow-sm">
+        <div class="responsive-table-card overflow-hidden rounded-[2rem] border border-slate-100 bg-white shadow-sm">
             <div class="overflow-x-auto">
                 <table class="w-full min-w-[1180px] border-collapse text-left">
                     <thead>
@@ -265,7 +265,7 @@
 
         <div x-show="returnModal" x-cloak class="fixed inset-0 z-[60] flex items-center justify-center px-4">
             <div class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm" @click="returnModal = false"></div>
-            <div class="relative w-full max-w-md overflow-hidden rounded-[2rem] bg-white p-8 shadow-2xl" x-transition>
+            <div class="responsive-modal relative w-full max-w-md overflow-hidden rounded-[2rem] bg-white p-6 sm:p-8 shadow-2xl" x-transition>
                 <div class="mb-6">
                     <h3 class="text-xl font-bold text-slate-800">Kembalikan Buku</h3>
                     <p class="mt-1 text-sm text-slate-500" x-text="'Anda akan mengembalikan: ' + activeBookTitle"></p>
@@ -286,7 +286,7 @@
 
         <div x-show="payModal" x-cloak x-transition class="fixed inset-0 z-[60] flex items-center justify-center px-4">
             <div class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm" @click="payModal = false"></div>
-            <div class="relative flex max-h-[90vh] w-full max-w-md flex-col overflow-hidden rounded-[2.4rem] bg-white p-8 shadow-2xl md:p-9">
+            <div class="responsive-modal relative flex max-h-[90vh] w-full max-w-md flex-col overflow-hidden rounded-[2.4rem] bg-white p-6 shadow-2xl md:p-9">
                 <div class="mb-7">
                     <div class="mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-rose-50 text-rose-500 shadow-[0_16px_34px_-24px_rgba(244,63,94,0.55)]">
                         <i class="fas fa-wallet text-xl"></i>

@@ -21,7 +21,7 @@
             </a>
         </div>
 
-        <div class="grid grid-cols-1 gap-4 md:grid-cols-3">
+        <div class="metric-grid grid grid-cols-1 gap-4 md:grid-cols-3">
             <div class="rounded-[2rem] border border-slate-100 bg-white p-6 shadow-sm">
                 <p class="text-[11px] font-bold uppercase tracking-[0.24em] text-slate-400">Total Buku</p>
                 <p class="mt-4 text-3xl font-black text-slate-800">{{ number_format($totalBooks) }}</p>
@@ -52,7 +52,7 @@
                     </div>
                 </div>
 
-                <form action="{{ route('peminjam.books.index') }}" method="GET" class="mt-6 grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-12" @submit="loading = true">
+                <form action="{{ route('peminjam.books.index') }}" method="GET" class="responsive-filter-form mt-6 grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-12" @submit="loading = true">
                     <div class="relative md:col-span-2 xl:col-span-4">
                         <i class="fas fa-search absolute left-4 top-1/2 -translate-y-1/2 text-slate-400"></i>
                         <input type="text" name="search" value="{{ request('search') }}" placeholder="Cari judul, penulis, penerbit..." class="w-full rounded-2xl border-slate-200 py-3 pl-12 pr-4 text-slate-600 placeholder:text-slate-300 focus:border-indigo-500 focus:ring-indigo-500/10">
@@ -93,7 +93,7 @@
                         <option value="az" @selected(request('sort') === 'az')>A-Z</option>
                     </select>
 
-                    <div class="flex items-stretch gap-2 md:col-span-1 md:justify-end xl:col-span-8">
+                    <div class="responsive-filter-actions flex items-stretch gap-2 md:col-span-1 md:justify-end xl:col-span-8">
                         <button type="submit" class="rounded-2xl bg-slate-900 px-5 py-3 text-sm font-bold text-white transition-all hover:bg-slate-950" :disabled="loading">
                             <span x-show="!loading">Terapkan</span>
                             <span x-show="loading" x-cloak>Memuat...</span>

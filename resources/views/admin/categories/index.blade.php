@@ -61,7 +61,7 @@
         </button>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5 mb-8">
+    <div class="metric-grid grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5 mb-8">
         <div class="bg-white rounded-[2rem] border border-slate-100 shadow-sm p-6">
             <p class="text-xs font-bold uppercase tracking-widest text-slate-400">Total Kategori</p>
             <p class="mt-3 text-4xl font-black text-slate-800">{{ $stats['total'] }}</p>
@@ -87,7 +87,7 @@
         <form
             action="{{ route('admin.categories.index') }}"
             method="GET"
-            class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-[1.7fr_1fr_1fr_1fr_auto] gap-4"
+            class="responsive-filter-form grid grid-cols-1 md:grid-cols-2 xl:grid-cols-[1.7fr_1fr_1fr_1fr_auto] gap-4"
             @submit="filterLoading = true"
         >
             <div class="relative">
@@ -120,7 +120,7 @@
                 <option value="50" {{ (string) $perPage === '50' ? 'selected' : '' }}>50 data / halaman</option>
             </select>
 
-            <div class="flex gap-2">
+            <div class="responsive-filter-actions flex gap-2">
                 <button type="submit" class="flex-1 px-4 py-3 bg-slate-800 hover:bg-slate-900 text-white rounded-2xl font-bold transition-all duration-300">
                     <span x-show="!filterLoading">Terapkan</span>
                     <span x-show="filterLoading" x-cloak>Memuat...</span>
@@ -132,7 +132,7 @@
         </form>
     </div>
 
-    <div class="bg-white rounded-[2rem] shadow-sm border border-slate-100 overflow-hidden">
+    <div class="responsive-table-card bg-white rounded-[2rem] shadow-sm border border-slate-100 overflow-hidden">
         <div class="px-6 py-5 border-b border-slate-100 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-3">
             <div>
                 <h3 class="text-lg font-bold text-slate-800">Daftar Kategori</h3>
@@ -267,7 +267,7 @@
             role="dialog"
         >
             <div class="absolute inset-0 bg-slate-900/60 backdrop-blur-sm" @click="closeModals()"></div>
-            <div class="relative w-full max-w-2xl bg-white rounded-[2rem] shadow-2xl border border-slate-100 overflow-hidden">
+            <div class="responsive-modal relative w-full max-w-2xl bg-white rounded-[2rem] shadow-2xl border border-slate-100 overflow-hidden">
                 <div class="px-6 py-5 border-b border-slate-100 flex items-start justify-between gap-4">
                     <div>
                         <h3 class="text-xl font-bold text-slate-800">Edit Kategori</h3>
@@ -365,7 +365,7 @@
             role="dialog"
         >
             <div class="absolute inset-0 bg-slate-900/60 backdrop-blur-sm" @click="closeModals()"></div>
-            <div class="relative w-full max-w-lg bg-white rounded-[2rem] shadow-2xl border border-slate-100 overflow-hidden">
+            <div class="responsive-modal relative w-full max-w-lg bg-white rounded-[2rem] shadow-2xl border border-slate-100 overflow-hidden">
                 <div class="p-6">
                     <div class="w-14 h-14 rounded-2xl bg-rose-50 text-rose-500 flex items-center justify-center mb-4">
                         <i class="fas fa-trash-alt text-xl"></i>
@@ -419,7 +419,7 @@
         role="dialog"
     >
         <div class="absolute inset-0 bg-slate-900/60 backdrop-blur-sm" @click="closeModals()"></div>
-        <div class="relative w-full max-w-2xl bg-white rounded-[2rem] shadow-2xl border border-slate-100 overflow-hidden">
+        <div class="responsive-modal relative w-full max-w-2xl bg-white rounded-[2rem] shadow-2xl border border-slate-100 overflow-hidden">
             <div class="px-6 py-5 border-b border-slate-100 flex items-start justify-between gap-4">
                 <div>
                     <h3 class="text-xl font-bold text-slate-800">Tambah Kategori</h3>

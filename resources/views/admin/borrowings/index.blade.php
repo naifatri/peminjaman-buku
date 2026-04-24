@@ -34,7 +34,7 @@
         </div>
     </div>
 
-    <div class="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-4">
+    <div class="metric-grid grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-4">
         <div class="rounded-[2rem] border border-slate-100 bg-white p-6 shadow-sm">
             <p class="text-[11px] font-bold uppercase tracking-[0.28em] text-slate-400">Total Peminjaman</p>
             <p class="mt-4 text-3xl font-black text-slate-800">{{ number_format($stats['total']) }}</p>
@@ -110,7 +110,7 @@
     </div>
 
     <div class="rounded-[2rem] border border-slate-100 bg-white p-6 shadow-sm">
-        <form action="{{ route('admin.borrowings.index') }}" method="GET" class="grid grid-cols-1 gap-4 lg:grid-cols-6" @submit="loading = true">
+        <form action="{{ route('admin.borrowings.index') }}" method="GET" class="responsive-filter-form grid grid-cols-1 gap-4 lg:grid-cols-6" @submit="loading = true">
             <div class="relative lg:col-span-2">
                 <i class="fas fa-search absolute left-4 top-1/2 -translate-y-1/2 text-slate-400"></i>
                 <input
@@ -141,7 +141,7 @@
                 <option value="due_soonest" @selected(request('sort') === 'due_soonest')>Jatuh Tempo Terdekat</option>
             </select>
 
-            <div class="flex gap-2">
+            <div class="responsive-filter-actions flex gap-2">
                 <button type="submit" class="flex-1 rounded-2xl bg-slate-900 px-4 py-3 text-sm font-bold text-white transition-all duration-300 hover:bg-slate-950" :disabled="loading">
                     <span x-show="!loading">Terapkan</span>
                     <span x-show="loading" x-cloak>Memuat...</span>
@@ -153,7 +153,7 @@
         </form>
     </div>
 
-    <div class="overflow-hidden rounded-[2rem] border border-slate-100 bg-white shadow-sm">
+    <div class="responsive-table-card overflow-hidden rounded-[2rem] border border-slate-100 bg-white shadow-sm">
         <div class="overflow-x-auto">
             <table class="w-full min-w-[1100px] border-collapse text-left">
                 <thead>
@@ -336,7 +336,7 @@
 
     <div x-show="returnModal" x-cloak class="fixed inset-0 z-[60] flex items-center justify-center px-4">
         <div class="fixed inset-0 bg-slate-950/60 backdrop-blur-sm" @click="returnModal = false"></div>
-        <div class="relative w-full max-w-xl rounded-[2rem] bg-white p-8 shadow-2xl">
+        <div class="responsive-modal relative w-full max-w-xl rounded-[2rem] bg-white p-6 sm:p-8 shadow-2xl">
             <div class="mb-6">
                 <p class="text-[11px] font-bold uppercase tracking-[0.28em] text-indigo-500">Pengembalian Buku</p>
                 <h3 class="mt-2 text-2xl font-black text-slate-800" x-text="activeUserName"></h3>
@@ -381,7 +381,7 @@
 
     <div x-show="extendModal" x-cloak class="fixed inset-0 z-[60] flex items-center justify-center px-4">
         <div class="fixed inset-0 bg-slate-950/60 backdrop-blur-sm" @click="extendModal = false"></div>
-        <div class="relative w-full max-w-lg rounded-[2rem] bg-white p-8 shadow-2xl">
+        <div class="responsive-modal relative w-full max-w-lg rounded-[2rem] bg-white p-6 sm:p-8 shadow-2xl">
             <div class="mb-6">
                 <p class="text-[11px] font-bold uppercase tracking-[0.28em] text-slate-500">Perpanjang Masa Pinjam</p>
                 <h3 class="mt-2 text-2xl font-black text-slate-800" x-text="activeUserName"></h3>

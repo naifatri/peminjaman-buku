@@ -68,7 +68,7 @@
             </div>
         @endif
 
-        <div class="grid grid-cols-1 gap-4 md:grid-cols-3">
+        <div class="metric-grid grid grid-cols-1 gap-4 md:grid-cols-3">
             <div class="rounded-[2rem] border border-rose-100 bg-rose-50/80 p-6 shadow-sm">
                 <p class="text-[11px] font-bold uppercase tracking-[0.24em] text-rose-500">Belum Lunas</p>
                 <p class="mt-4 text-3xl font-black text-rose-700">{{ number_format($unpaidCount) }}</p>
@@ -105,7 +105,7 @@
                 </div>
             </div>
 
-            <form action="{{ route('peminjam.fines.index') }}" method="GET" class="mt-6 grid grid-cols-1 gap-4 lg:grid-cols-[minmax(0,1.6fr)_220px_220px_auto]" @submit="loading = true">
+            <form action="{{ route('peminjam.fines.index') }}" method="GET" class="responsive-filter-form mt-6 grid grid-cols-1 gap-4 lg:grid-cols-[minmax(0,1.6fr)_220px_220px_auto]" @submit="loading = true">
                 <div class="relative">
                     <i class="fas fa-search absolute left-4 top-1/2 -translate-y-1/2 text-slate-400"></i>
                     <input type="text" name="search" value="{{ $search }}" placeholder="Cari berdasarkan judul buku..." class="w-full rounded-2xl border-slate-200 py-3 pl-12 pr-4 text-slate-600 placeholder:text-slate-300 transition-all duration-300 focus:border-indigo-500 focus:ring-indigo-500/10">
@@ -123,7 +123,7 @@
                     <option value="amount_asc" @selected($sort === 'amount_asc')>Jumlah denda terendah</option>
                 </select>
 
-                <div class="flex gap-2">
+                <div class="responsive-filter-actions flex gap-2">
                     <button type="submit" class="flex-1 rounded-2xl bg-slate-900 px-4 py-3 text-sm font-bold text-white transition-all duration-300 hover:bg-slate-950" :disabled="loading">
                         <span x-show="!loading">Terapkan</span>
                         <span x-show="loading" x-cloak>Memuat...</span>
@@ -152,7 +152,7 @@
             @endfor
         </div>
 
-        <div x-show="ready" x-cloak class="rounded-[2rem] border border-slate-100 bg-white shadow-sm">
+        <div x-show="ready" x-cloak class="responsive-table-card rounded-[2rem] border border-slate-100 bg-white shadow-sm">
             @if($fines->isEmpty())
                 <div class="px-8 py-16 text-center">
                     <div class="mx-auto flex h-20 w-20 items-center justify-center rounded-3xl bg-slate-50 text-slate-300">
@@ -272,7 +272,7 @@
 
         <div x-show="payModal" x-cloak x-transition class="fixed inset-0 z-[60] flex items-center justify-center px-4">
             <div class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm" @click="payModal = false"></div>
-            <div class="relative flex max-h-[90vh] w-full max-w-md flex-col overflow-hidden rounded-[2.4rem] bg-white p-8 shadow-2xl md:p-9">
+            <div class="responsive-modal relative flex max-h-[90vh] w-full max-w-md flex-col overflow-hidden rounded-[2.4rem] bg-white p-6 shadow-2xl md:p-9">
                 <div class="mb-7">
                     <div class="mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-rose-50 text-rose-500 shadow-[0_16px_34px_-24px_rgba(244,63,94,0.55)]">
                         <i class="fas fa-wallet text-xl"></i>

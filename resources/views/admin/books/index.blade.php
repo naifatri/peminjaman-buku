@@ -18,7 +18,7 @@
         </a>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-5 mb-8">
+    <div class="metric-grid grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-5 mb-8">
         <div class="bg-white rounded-[2rem] border border-slate-100 shadow-sm p-6">
             <p class="text-xs font-bold uppercase tracking-widest text-slate-400">Total Buku</p>
             <p class="mt-3 text-4xl font-black text-slate-800">{{ $stats['total'] }}</p>
@@ -90,7 +90,7 @@
     @endif
 
     <div class="bg-white rounded-[2rem] shadow-sm border border-slate-100 p-6 mb-8">
-        <form action="{{ route('admin.books.index') }}" method="GET" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-[1.7fr_1fr_1fr_1fr_1fr_auto] gap-4" x-data="{ loading: false }" @submit="loading = true">
+        <form action="{{ route('admin.books.index') }}" method="GET" class="responsive-filter-form grid grid-cols-1 md:grid-cols-2 xl:grid-cols-[1.7fr_1fr_1fr_1fr_1fr_auto] gap-4" x-data="{ loading: false }" @submit="loading = true">
             <div class="relative">
                 <i class="fas fa-search absolute left-4 top-1/2 -translate-y-1/2 text-slate-400"></i>
                 <input type="text" name="search" value="{{ request('search') }}" placeholder="Cari judul, penulis, ISBN, atau rak..."
@@ -126,7 +126,7 @@
                 <option value="stock_asc" {{ request('sort') === 'stock_asc' ? 'selected' : '' }}>Stok Tersedikit</option>
             </select>
 
-            <div class="flex gap-2">
+            <div class="responsive-filter-actions flex gap-2">
                 <button type="submit" :disabled="loading" :class="loading ? 'opacity-70 cursor-wait' : ''" class="flex-1 px-4 py-3 bg-slate-800 hover:bg-slate-900 text-white rounded-2xl font-bold transition-all duration-300">
                     <span x-show="!loading">Filter</span>
                     <span x-show="loading" x-cloak>Memuat...</span>
@@ -138,14 +138,14 @@
         </form>
     </div>
 
-    <div class="bg-white rounded-[2rem] shadow-sm border border-slate-100 overflow-hidden">
+    <div class="responsive-table-card bg-white rounded-[2rem] shadow-sm border border-slate-100 overflow-hidden">
         <div class="px-6 py-5 border-b border-slate-100 flex flex-col xl:flex-row xl:items-center xl:justify-between gap-4">
             <div>
                 <h3 class="text-lg font-bold text-slate-800">Manajemen Koleksi</h3>
                 <p class="text-sm text-slate-500 mt-1">Bulk action aktif saat ada minimal satu buku yang dipilih.</p>
             </div>
 
-            <form action="{{ route('admin.books.bulk-action') }}" method="POST" class="grid grid-cols-1 md:grid-cols-[180px_220px_220px_auto] gap-3 items-center" x-data="{ submitting: false }" @submit="if (selectedBooks.length === 0) { alert('Pilih minimal satu buku terlebih dahulu.'); $event.preventDefault(); return; } submitting = true;">
+            <form action="{{ route('admin.books.bulk-action') }}" method="POST" class="responsive-bulk-form grid grid-cols-1 md:grid-cols-[180px_220px_220px_auto] gap-3 items-center" x-data="{ submitting: false }" @submit="if (selectedBooks.length === 0) { alert('Pilih minimal satu buku terlebih dahulu.'); $event.preventDefault(); return; } submitting = true;">
                 @csrf
                 <template x-for="bookId in selectedBooks" :key="bookId">
                     <input type="hidden" name="book_ids[]" :value="bookId">

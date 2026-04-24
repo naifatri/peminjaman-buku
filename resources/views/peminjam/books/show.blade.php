@@ -106,6 +106,41 @@
                             <p class="mt-2 text-lg font-black text-rose-700">Rp {{ number_format((float) ($finePolicy['late_fee_per_day'] ?? 0), 0, ',', '.') }}</p>
                         </div>
                     </div>
+
+                    <div class="mt-8">
+                        <p class="text-[11px] font-bold uppercase tracking-[0.24em] text-slate-400 mb-4">Informasi Kondisi Buku</p>
+                        <div class="overflow-hidden rounded-[1.5rem] border border-slate-200 bg-white">
+                            <table class="w-full">
+                                <thead>
+                                    <tr class="border-b border-slate-200 bg-slate-50">
+                                        <th class="px-5 py-4 text-left text-[11px] font-bold uppercase tracking-[0.18em] text-slate-600">Kondisi Buku</th>
+                                        <th class="px-5 py-4 text-left text-[11px] font-bold uppercase tracking-[0.18em] text-slate-600">Persyaratan Pengembalian</th>
+                                        <th class="px-5 py-4 text-left text-[11px] font-bold uppercase tracking-[0.18em] text-slate-600">Sanksi</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-slate-200">
+                                    <tr class="hover:bg-slate-50 transition-colors">
+                                        <td class="px-5 py-4 text-sm font-semibold text-slate-700">Baik</td>
+                                        <td class="px-5 py-4 text-sm text-slate-600">Harus dikembalikan dalam kondisi baik</td>
+                                        <td class="px-5 py-4">
+                                            <span class="inline-flex items-center rounded-full bg-emerald-50 border border-emerald-200 px-3 py-1 text-xs font-semibold text-emerald-700">
+                                                Tidak ada denda
+                                            </span>
+                                        </td>
+                                    </tr>
+                                    <tr class="hover:bg-slate-50 transition-colors">
+                                        <td class="px-5 py-4 text-sm font-semibold text-slate-700">Rusak/Bermasalah</td>
+                                        <td class="px-5 py-4 text-sm text-slate-600">Jika dikembalikan dalam kondisi rusak, akan dikenakan denda</td>
+                                        <td class="px-5 py-4">
+                                            <span class="inline-flex items-center rounded-full bg-rose-50 border border-rose-200 px-3 py-1 text-xs font-semibold text-rose-700">
+                                                Dikenakan denda
+                                            </span>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
             </div>
 

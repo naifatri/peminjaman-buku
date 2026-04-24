@@ -28,7 +28,7 @@
         </div>
     </div>
 
-    <div class="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-4">
+    <div class="metric-grid grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-4">
         <div class="rounded-[2rem] border border-slate-100 bg-white p-6 shadow-sm">
             <p class="text-[11px] font-bold uppercase tracking-[0.24em] text-slate-400">Total Peminjaman</p>
             <p class="mt-4 text-3xl font-black text-slate-800">{{ number_format($summary['total_borrowings']) }}</p>
@@ -72,7 +72,7 @@
             @endforeach
         </div>
 
-        <form action="{{ route('admin.reports.index') }}" method="GET" class="mt-6 grid grid-cols-1 gap-4 lg:grid-cols-6" @submit="loading = true">
+        <form action="{{ route('admin.reports.index') }}" method="GET" class="responsive-filter-form mt-6 grid grid-cols-1 gap-4 lg:grid-cols-6" @submit="loading = true">
             <div class="relative lg:col-span-2">
                 <i class="fas fa-user absolute left-4 top-1/2 -translate-y-1/2 text-slate-400"></i>
                 <input type="text" name="user_name" value="{{ $filters['user_name'] }}" placeholder="Cari nama pengguna..." class="w-full rounded-2xl border-slate-200 py-3 pl-12 pr-4 text-slate-600 placeholder:text-slate-300 focus:border-indigo-500 focus:ring-indigo-500/10">
@@ -109,7 +109,7 @@
             </div>
             <input type="hidden" name="quick_filter" value="{{ $filters['quick_filter'] }}">
 
-            <div class="flex gap-2 lg:col-span-6 lg:justify-end">
+            <div class="responsive-filter-actions flex gap-2 lg:col-span-6 lg:justify-end">
                 <button type="submit" class="rounded-2xl bg-slate-900 px-5 py-3 text-sm font-bold text-white transition-all hover:bg-slate-950" :disabled="loading || exporting">
                     <span x-show="!loading">Terapkan Filter</span>
                     <span x-show="loading" x-cloak>Memuat...</span>
@@ -160,8 +160,8 @@
         </div>
     </div>
 
-    <div class="overflow-hidden rounded-[2rem] border border-slate-100 bg-white shadow-sm">
-        <div class="flex items-center justify-between border-b border-slate-100 px-6 py-5">
+    <div class="responsive-table-card overflow-hidden rounded-[2rem] border border-slate-100 bg-white shadow-sm">
+        <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between border-b border-slate-100 px-6 py-5">
             <div>
                 <p class="text-[11px] font-bold uppercase tracking-[0.24em] text-slate-400">Data Detail</p>
                 <h3 class="mt-2 text-xl font-black text-slate-800">Transaksi peminjaman</h3>
